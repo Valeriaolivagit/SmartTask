@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TareaNormal.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">smarttask</a> &gt; <a href="index.source.html" class="el_package">com.smarttask</a> &gt; <span class="el_source">TareaNormal.java</span></div><h1>TareaNormal.java</h1><pre class="source lang-java linenums">package com.smarttask;
+
+/**
+ * Clase que hereda de Tarea y representa las tareas de baja 
+ * prioridad dentro del sistema.
+ * 
+ * Esta clase es una especializacion de tarea, y se define automaticamente 
+ * el nivel de prioridad como baja.
+ * 
+ * Permite diferenciar las tareas según su importancia
+ * dentro del gestor de tareas.
+ * 
+ * @author Valeria Oliva
+ * @version 1.0
+ */
+
+public class TareaNormal extends Tarea {
+    
+    /**
+     * Nivel de prioridad de la tarea.
+     * 
+     * Indica que la tarea presenta una prioridad baja
+     * dentro del sistema de gestión de tareas.
+     *
+     */
+<span class="fc" id="L26">    private final String prioridad = &quot;Prioridad: Baja&quot;;</span>
+
+    /**
+     * Constructor de la clase TareaNormal
+     * 
+     * Crea una nueva tarea con prioridad baja.
+     * Recibe la descripción de la tarea (parámetro nombreTarea) y su 
+     * estado inicial (parámetro completado), y los pasa al constructor de
+     * la clase mediante super().
+     * 
+     * @param nombreTarea cadena de texto correspondiente a la descripción de la tarea.
+     * @param completado boolean correspondiente a estado actual de la tarea. true si
+     *                   está completado y false si está pendiente.
+     */
+    public TareaNormal(String nombreTarea, boolean completado) {
+<span class="fc" id="L41">        super(nombreTarea, completado);</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Sobreescribe el método getPrioridad() definido en la clase padre Tarea.
+     * Este método devuelve el nivel de prioridad asociado a tareas normales.
+     * 
+     * @return devuelve una cadena de texto que indica &quot;Prioridad: Baja&quot;.
+     */
+    @Override
+    public String getPrioridad() {
+<span class="fc" id="L52">        return prioridad;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

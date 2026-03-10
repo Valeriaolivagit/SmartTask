@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+smarttask,com.smarttask,TareaNormal,0,10,0,0,0,4,0,2,0,2
+smarttask,com.smarttask,Tarea,0,42,0,0,0,16,0,8,0,8
+smarttask,com.smarttask,Main,24,0,0,0,7,0,2,0,2,0
+smarttask,com.smarttask,TareaUrgente,0,10,0,0,0,4,0,2,0,2
+smarttask,com.smarttask,GestorTareas,0,295,0,31,0,81,0,31,0,15
+smarttask,com.smarttask,Menu,102,351,19,29,47,129,19,36,4,19

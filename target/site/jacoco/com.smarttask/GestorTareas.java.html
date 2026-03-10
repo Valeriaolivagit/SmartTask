@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorTareas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">smarttask</a> &gt; <a href="index.source.html" class="el_package">com.smarttask</a> &gt; <span class="el_source">GestorTareas.java</span></div><h1>GestorTareas.java</h1><pre class="source lang-java linenums">package com.smarttask;
+
+import java.util.ArrayList;
+
+/**
+ * Clase encargada de crear, organizar y gestionar las tareas.
+ * 
+ * Cuenta con métodos que permiten la creacion, edición,
+ * eliminación y clasificación de las tareas.
+ * 
+ * Métodos principales:
+ * GestorTareas(): inicializa la lista donde se almacenan las tareas.
+ * addTarea(): permite la creación de una tarea.
+ * deleteTareas(): elimina una tarea existente.
+ * completarTarea(): marca una tarea como completada.
+ * showTareasPendientes(): muestra las tareas que aún no han sido completadas.
+ * 
+ * @author Valeria Oliva
+ * @version 1.0
+ */
+
+public class GestorTareas implements IGestorTareas {
+    /**
+     * Lista que almacena todas las tareas registradas.
+     */
+    private ArrayList&lt;Tarea&gt; tareas;
+
+    /**
+     * Inicializa la lista que almacenará las tareas.
+     */
+<span class="fc" id="L31">    public GestorTareas() {</span>
+<span class="fc" id="L32">        this.tareas = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L33">    }</span>
+
+    /**
+     * Obtiene el número total de tareas almacenadas.
+     * 
+     * @return total de tareas registradas.
+     */
+    public int totalTareas() {
+<span class="fc" id="L41">        return tareas.size();</span>
+    }
+
+    /**
+     * Obtiene la tarea ubicada en un índice específico de la lista.
+     * 
+     * @param indice posición de la tarea dentro de la lista.
+     * @return tarea correspondiente al índice ingresado.
+     */
+    public Tarea getTareaPorIndice(int indice) {
+<span class="fc" id="L51">        return tareas.get(indice);</span>
+    }
+
+    /**
+     * Crea y agrega una nueva tarea a la lista de tareas.
+     * 
+     * Ejecuta un switch el cual, dependiendo del valor númerico ingresado,
+     * clasificará la tarea como tarea urgente o normal, mostrando un mensaje
+     * en cada caso.
+     * 
+     * Opciones:
+     * 1: crea una tarea urgente.
+     * 2: crea una tarea normal.
+     * Cualquier otro valor ingresado crea una tarea normal por defecto.
+     * 
+     * @param descripcion descripción asoaciada a la tarea.
+     * @param priority    valor númerico que indica la prioridad, 1 para alta, 2
+     *                    para baja,
+     *                    cualquier otro valor se asigna como prioridad baja.
+     */
+    public void addTarea(String descripcion, int priority) {
+
+<span class="fc bfc" id="L73" title="All 3 branches covered.">        switch (priority) {</span>
+            case 1:
+<span class="fc" id="L75">                tareas.add(new TareaUrgente(descripcion, false));</span>
+<span class="fc" id="L76">                System.out.println(&quot;Se ha agregado una Tarea Urgente.&quot;);</span>
+<span class="fc" id="L77">                break;</span>
+
+            case 2:
+<span class="fc" id="L80">                tareas.add(new TareaNormal(descripcion, false));</span>
+<span class="fc" id="L81">                System.out.println(&quot;Se ha agregado una Tarea Normal.&quot;);</span>
+<span class="fc" id="L82">                break;</span>
+
+            default:
+<span class="fc" id="L85">                System.out.println(&quot;Prioridad invalida. Se asignará como tarea normal.&quot;);</span>
+<span class="fc" id="L86">                tareas.add(new TareaNormal(descripcion, false));</span>
+                break;
+        }
+<span class="fc" id="L89">    }</span>
+
+    /**
+     * Muestra el listado de tareas pendientes.
+     * 
+     * Recorre la lista de tareas e imprime únicamente las
+     * tareas que no se encuentran completadas. Si no existen
+     * tareas registradas o todas están completadas, muestra un mensaje
+     * de que no hay tareas pendientes.
+     * 
+     */
+    public void showTareasPendientes() {
+<span class="fc" id="L101">        boolean hayTarea = false;</span>
+
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (Tarea tarea : tareas) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            if (tarea.getCompletado()) {</span>
+<span class="fc" id="L105">                continue;</span>
+            }
+<span class="fc" id="L107">            System.out.println(tarea.getId() + &quot;. &quot; + tarea.getNombreTarea() + &quot; &quot; + tarea.getPrioridad());</span>
+<span class="fc" id="L108">            hayTarea = true;</span>
+<span class="fc" id="L109">        }</span>
+
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (!hayTarea) {</span>
+<span class="fc" id="L112">            System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L113">            System.out.println(&quot;- No tienes tareas pendientes -&quot;);</span>
+        }
+<span class="fc" id="L115">    }</span>
+
+    /**
+     * Muestra el listado de tareas completadas.
+     * 
+     * Recorre la lista de tareas e imprime únicamente las
+     * tareas que se encuentran completadas. Si no existen
+     * tareas registradas, muestra un mensaje de que aún no hay tareas
+     * agregadas. Si todas las tareas están pendientes,informa
+     * de que no hay tareas completadas por el momento.
+     * 
+     */
+    public void showTareasCompletas() {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (tareas.isEmpty()) {</span>
+<span class="fc" id="L129">            System.out.println(&quot;No hay tareas agregadas aún.&quot;);</span>
+<span class="fc" id="L130">            return;</span>
+        }
+
+<span class="fc" id="L133">        boolean hayCompletadas = false;</span>
+
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        for (Tarea tarea : tareas) {</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">            if (tarea.getCompletado()) {</span>
+<span class="fc" id="L137">                System.out.println(tarea.getId() + &quot;. &quot; + tarea.getNombreTarea() + &quot; &quot; + tarea.getPrioridad() + &quot; &quot;</span>
+                        + &quot;Estado: Completado&quot;);
+<span class="fc" id="L139">                hayCompletadas = true;</span>
+            }
+<span class="fc" id="L141">        }</span>
+
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (!hayCompletadas) {</span>
+<span class="fc" id="L144">            System.out.println(&quot;No tienes tareas completadas por el momento.&quot;);</span>
+        }
+<span class="fc" id="L146">    }</span>
+
+    /**
+     * Elimina la tarea seleccionada.
+     * 
+     * Mediante el método getIndice(), obtiene la posición
+     * en la lista de la tarea que se requiere eliminar. Si el índice
+     * es válido, la tarea se elimina de la lista, y se muestra un
+     * mensaje de confirmación. Caso contrario, se informa que el
+     * identificador es inválido.
+     * 
+     * @param idDelete identificador de la tarea que se requiere eliminar.
+     */
+    public void deleteTareas(int idDelete) {
+<span class="fc" id="L160">        int resultado = getIndice(idDelete);</span>
+
+<span class="fc bfc" id="L162" title="All 2 branches covered.">        if (resultado != -1) {</span>
+<span class="fc" id="L163">            tareas.remove(resultado);</span>
+<span class="fc" id="L164">            System.out.println(&quot;Tarea eliminada exitosamente.&quot;);</span>
+        } else {
+<span class="fc" id="L166">            System.out.println(&quot;ID invalido&quot;);           </span>
+        }
+<span class="fc" id="L168">    }</span>
+
+    /**
+     * Retorna la posición de la tarea solicitada.
+     * 
+     * Recorre la lista de tareas, y busca aquella cuyo
+     * identificador coincida con el valor ingresado. Si
+     * encuentra coincidencia retorna la posición de la tarea
+     * dentro de la lista. En caso contrario retorna -1.
+     * 
+     * @param idBuscado identificador de la tarea que se desea buscar.
+     * @return posición de la tarea en la lista si existe,
+     *         -1 si no se encuentra una coincidencia.
+     */
+    private int getIndice(int idBuscado) {
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        for (int i = 0; i &lt; tareas.size(); i++) {</span>
+<span class="fc" id="L184">            Tarea indice = tareas.get(i);</span>
+
+<span class="fc bfc" id="L186" title="All 2 branches covered.">            if (indice.getId() == idBuscado) {</span>
+<span class="fc" id="L187">                return i;</span>
+            }
+        }
+<span class="fc" id="L190">        return -1;</span>
+    }
+
+    /**
+     * Imprime un mensaje si no hay tareas
+     */
+    public void noHayTareas() {
+<span class="fc" id="L197">        System.out.println(&quot;No hay tareas agregadas aún.&quot;);</span>
+<span class="fc" id="L198">    }</span>
+
+    /**
+     * Marca la tarea como completada.
+     * 
+     * Recibe el identificador de la tarea a completar,
+     * y mediante el método getIndice() obtiene la posición
+     * de la tarea. Si el identificador no coincide con la tarea
+     * indica que el id no es válido y detiene la ejecución.
+     * 
+     * Si el identificador coincide con la tarea,
+     * cambia el estado a completado y muestra un mensaje de éxito.
+     * Si la tarea ya está completada, muestra un mensaje indicando
+     * el estado.     
+     * 
+     * @param idTarea identificador de la tarea a completar.
+     */
+    public void completarTarea(int idTarea) {
+<span class="fc" id="L216">        int resultado = getIndice(idTarea);</span>
+
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        if (resultado == -1) {</span>
+<span class="fc" id="L219">            System.out.println(&quot;ID inválido&quot;);</span>
+<span class="fc" id="L220">            return;</span>
+        }
+
+<span class="fc" id="L223">        boolean completado = tareas.get(resultado).getCompletado();</span>
+
+<span class="fc bfc" id="L225" title="All 2 branches covered.">        if (completado) {</span>
+<span class="fc" id="L226">            System.out.println(&quot;La tarea ya se encuentra completada&quot;);</span>
+        } else {
+<span class="fc" id="L228">            tareas.get(resultado).setCompletado(true);</span>
+<span class="fc" id="L229">            System.out.println(&quot;¡Felicidades! Has completado la tarea.&quot;);</span>
+        }
+<span class="fc" id="L231">    }</span>
+
+    /**
+     * Sobreescribe el método editarTarea() de la
+     * interfaz IGestorTareas.
+     * 
+     * Recibe el identificador de la tarea, y mediante el
+     * método getIndice() obtiene la posición de la tarea
+     * en la lista.
+     * 
+     * @param idTarea identificador de la tarea que se desea editar
+     * @return la posición de la tarea en la lista si existe, o
+     *         -1 en caso de no existir coincidencias.
+     */
+    @Override
+    public int editarTarea(int idTarea) {
+<span class="fc" id="L247">        int resultado = getIndice(idTarea);</span>
+<span class="fc" id="L248">        return resultado;</span>
+    }
+
+    /**
+     * Edita la descripción de la tarea seleccionada.
+     * 
+     * Recibe la posición de la tarea dentro de la lista
+     * y la nueva descripción que se desea asignar. Luego ejecuta
+     * el cambio correspondiente y muestra un mensaje de éxito.
+     *
+     * @param resultado      posición de la tarea dentro de la lista.
+     * @param newDescripcion nueva descripción de la tarea seleccionada.
+     */
+    public void editarDescripcionTarea(int resultado, String newDescripcion) {
+<span class="fc" id="L262">        tareas.get(resultado).setNombreTarea(newDescripcion);</span>
+<span class="fc" id="L263">        System.out.println(&quot;Se ha establecido la nueva descripción.&quot;);</span>
+<span class="fc" id="L264">    }</span>
+
+    /**
+     * Muestra las opciones disponibles del submenú de edición de tareas.
+     * 
+     * Permite al usuario seleccionar que aspecto de la tarea desea
+     * modificar, si desea volver al menú principal o finalizar la aplicación.
+     */
+    public void editSubMenuShowOptions() {
+<span class="fc" id="L273">        System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L274">        System.out.println(&quot;¿Qué desea editar?&quot;);</span>
+<span class="fc" id="L275">        System.out.println(&quot;1. Descripción de la tarea.&quot;);</span>
+<span class="fc" id="L276">        System.out.println(&quot;2. Estado de la tarea.&quot;);</span>
+<span class="fc" id="L277">        System.out.println(&quot;3. Volver al menú principal.&quot;);</span>
+<span class="fc" id="L278">        System.out.println(&quot;4. Salir de la aplicación.&quot;);</span>
+<span class="fc" id="L279">    }</span>
+
+    /**
+     * Muestra el estado actual de la tarea seleccionada.
+     * 
+     * Comprueba el estado actual de la tarea(pendiente o completado),
+     * y muestra el mensaje correspondiente.
+     * 
+     * @param resultado posición de la tarea dentro de la lista.
+     */
+    public void estadoTareaAEditar(int resultado) {
+<span class="fc bfc" id="L290" title="All 2 branches covered.">        if (tareas.get(resultado).getCompletado()) {</span>
+<span class="fc" id="L291">            System.out.println(&quot;La tarea actual esta Completada&quot;);</span>
+        } else {
+<span class="fc" id="L293">            System.out.println(&quot;La tarea actual esta Pendiente&quot;);</span>
+        }
+<span class="fc" id="L295">    }</span>
+
+    /**
+     * Cambia el estado actual de una tarea.
+     * 
+     * Si la tarea se encuentra pendiente la marca como completada,
+     * y viceversa.
+     * 
+     * @param resultado posición de la tarea dentro de la lista.
+     */
+    public void cambioDeEstado(int resultado) {
+<span class="fc bfc" id="L306" title="All 2 branches covered.">        if (tareas.get(resultado).getCompletado()) {</span>
+<span class="fc" id="L307">            tareas.get(resultado).setCompletado(false);</span>
+        } else {
+<span class="fc" id="L309">            tareas.get(resultado).setCompletado(true);</span>
+        }
+<span class="fc" id="L311">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

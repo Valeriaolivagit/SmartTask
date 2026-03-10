@@ -1,0 +1,7 @@
+com\smarttask\TareaUrgente.class
+com\smarttask\TareaNormal.class
+com\smarttask\GestorTareas.class
+com\smarttask\Main.class
+com\smarttask\Menu.class
+com\smarttask\IGestorTareas.class
+com\smarttask\Tarea.class

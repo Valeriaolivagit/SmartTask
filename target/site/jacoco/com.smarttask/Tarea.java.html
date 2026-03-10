@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tarea.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">smarttask</a> &gt; <a href="index.source.html" class="el_package">com.smarttask</a> &gt; <span class="el_source">Tarea.java</span></div><h1>Tarea.java</h1><pre class="source lang-java linenums">package com.smarttask;
+
+/**
+ * Clase abstracta que representa una tarea dentro de la aplicacion 
+ * SmartTask.
+ * 
+ * Cada tarea posee un identificador único, una descripción, un estado 
+ * (pendiente o completado), y un nivel de prioridad.
+ * Esta clase permite organizar y gestionar las tareas segun su prioridad.
+ * 
+ * Es extendida por las clases TareaNormal y TareaUrgente, las cuales
+ * definen el nivel de prioridad.
+ * 
+ * @author Valeria Oliva
+ * @version 1.0
+ */
+
+public abstract class Tarea {
+    /**
+     * Contador utilizado para generar el identificador único
+     * para cada tarea creada.
+     */
+<span class="fc" id="L23">    private static int counterId = 1;</span>
+    /**
+     * Identificador único de la tarea.
+     */
+    private int idTarea;
+    /**|
+     * Descripción de la tarea.
+     */
+    private String nombreTarea;
+
+    /**
+     * Estado actual de la tarea. 
+     * 
+     * Se encuentra predeterminado en false que indica
+     * que la tarea está pendiente.
+     */
+<span class="fc" id="L39">    private boolean completado = false;</span>
+    
+
+    /**
+     * Constructor de la clase Tarea.
+     * 
+     * Permite la creación de una nueva tarea, asignándole un identificador
+     * único mediante la variable counterId++, además de una descripción 
+     * y un estado inicial.
+     * 
+     * @param nombreTarea cadena de texto con la descripción de la tarea
+     * @param completado true si está completado y false si está pendiente
+     */
+<span class="fc" id="L52">    public Tarea(String nombreTarea, boolean completado) {</span>
+<span class="fc" id="L53">        this.idTarea = counterId++;</span>
+<span class="fc" id="L54">        this.nombreTarea = nombreTarea;</span>
+<span class="fc" id="L55">        this.completado = completado;</span>
+<span class="fc" id="L56">    }</span>
+
+    /**
+     * Obtiene el identificador único de la tarea.
+     * 
+     * @return identificador de la tarea.
+     */
+    public int getId() {
+<span class="fc" id="L64">        return idTarea;</span>
+    }
+
+    /**
+     * Obtiene la descripción asociada a la tarea.
+     * 
+     * @return descripción de la tarea.
+     */
+    public String getNombreTarea() {
+<span class="fc" id="L73">        return nombreTarea;</span>
+    }
+
+    /**
+     * Obtiene el estado actual de la tarea.
+     * 
+     * @return true si está completada 
+     *         false si está pendiente.
+     */
+    public boolean getCompletado() {
+<span class="fc" id="L83">        return completado;</span>
+    }
+
+    /**
+     * Método abstracto para obtener el nivel de 
+     * prioridad asociado a la tarea.
+     * 
+     * @return cadena de texto que representa la prioridad
+     *         de la tarea.
+     */
+    public abstract String getPrioridad();
+
+    /**
+     * Establece la descripción asociada a la tarea.
+     * 
+     * @param nombreTarea descripción asociada a la tarea.
+     */
+    public void setNombreTarea(String nombreTarea) {
+<span class="fc" id="L101">        this.nombreTarea = nombreTarea;</span>
+<span class="fc" id="L102">    }</span>
+
+    /**
+     * Establece el estado actual de la tarea.
+     * 
+     * @param completado true si está completada.
+     *                   false si está pendiente.
+     */
+    public void setCompletado(boolean completado) {
+<span class="fc" id="L111">        this.completado = completado;</span>
+<span class="fc" id="L112">    }</span>
+
+    /**
+     * Reinicia el contador utilizado para generar 
+     * el identificador único de la/s tarea/s.
+     */
+    public static void resetCounter() {
+<span class="fc" id="L119">        counterId = 1;</span>
+<span class="fc" id="L120">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

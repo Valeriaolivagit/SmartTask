@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Menu.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">smarttask</a> &gt; <a href="index.source.html" class="el_package">com.smarttask</a> &gt; <span class="el_source">Menu.java</span></div><h1>Menu.java</h1><pre class="source lang-java linenums">package com.smarttask;
+
+import java.util.Scanner;
+
+/**
+ * Clase encargada de gestionar la navegación e interacción del usuario.
+ * 
+ * Muestra las distintas opciones disponibles en la aplicación y permite
+ * al usuario tomar decisiones mediante el menú principal y los distintos
+ * submenús.
+ * 
+ * Cuenta con un menú principal, submenús dependiendo de la acción del usuario,
+ * y es la clase que realiza el manejo principal de Scanner.
+ * 
+ * Métodos principales:
+ * menu(): controla el flujo general de la aplicacion.
+ * subMenu(): permite visualizar las tareas y gestiona su manejo.
+ * salirApp(): finaliza la ejecución de la aplicacion.
+ * 
+ * @author Valeria Oliva
+ * @version 1.0
+ */
+
+public class Menu {
+    /**
+     * Indica si la aplicación debe continuar en ejecución.
+     * 
+     * Su valor es true mientras la aplicación este activa y
+     * false cuando se requiere finalizar la ejecución.
+     */
+<span class="fc" id="L31">    private boolean appRunner = true;</span>
+    /**
+     * Utilizado para instanciar el objeto Scanner.
+     * 
+     * Permite la captura de datos en la consola.
+     */
+    private Scanner sc;
+
+    /**
+     * Utilizado para instanciar el objeto GestorTareas.
+     * 
+     * Permite acceder a los métodos encargados de
+     * la gestión y administración de las tareas.
+     */
+    private GestorTareas gestor;
+
+    /**
+     * Constructor de la clase Menú.
+     * 
+     * Inicializa el estado de la aplicación, el objeto Scanner para el ingreso
+     * de datos del usuario y el gestor encargado de administrar las tareas.
+     * 
+     * @param appRunner true si la aplicación se encuentra en ejecución.
+     *                  false si la aplicación debe finalizar.
+     * @param sc        utilizado para la captura de valores ingresados por el
+     *                  usuario.
+     * @param gestor    instancia la clase GestorTareas encargada de gestionar las
+     *                  tareas
+     */
+<span class="fc" id="L60">    public Menu(boolean appRunner, Scanner sc, GestorTareas gestor) {</span>
+<span class="fc" id="L61">        this.appRunner = appRunner;</span>
+<span class="fc" id="L62">        this.sc = sc;</span>
+<span class="fc" id="L63">        this.gestor = gestor;</span>
+<span class="fc" id="L64">    }</span>
+
+    /**
+     * Obtiene el estado actual de la ejecución de la aplicación.
+     * 
+     * @return true si la aplicación debe continuar ejecutándose,
+     *         false si debe finalizar.
+     */
+    public boolean getAppRunner() {
+<span class="fc" id="L73">        return appRunner;</span>
+    }
+
+    /**
+     * Establece el estado actual de la aplicación.
+     * 
+     * @param appRunner true si la aplicación debe continuar ejecutándose,
+     *                  false si debe finalizar.
+     */
+    public void setAppRunner(boolean appRunner) {
+<span class="fc" id="L83">        this.appRunner = appRunner;</span>
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Muestra las opciones disponibles según la sección actual de la aplicación.
+     * 
+     * @param options indica el menu que se desea mostrar.
+     *                1 para el menú principal,
+     *                2 para el submenú de tareas,
+     *                u otros valores según la navegación definida.
+     */
+    public void showOptions(int options) {
+<span class="fc bfc" id="L95" title="All 6 branches covered.">        switch (options) {</span>
+            case 1:
+<span class="fc" id="L97">                System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L98">                System.out.println(&quot;¡Bienvenido a tu Aplicación SmartTask!&quot;);</span>
+<span class="fc" id="L99">                System.out.println(&quot;¿Que deseas hacer?&quot;);</span>
+<span class="fc" id="L100">                System.out.println(&quot;-----------------------------&quot;);</span>
+<span class="fc" id="L101">                System.out.println(&quot;1. Ver todas mis tareas&quot;);</span>
+<span class="fc" id="L102">                System.out.println(&quot;2. Agregar una tarea&quot;);</span>
+<span class="fc" id="L103">                System.out.println(&quot;3. Salir de la aplicación&quot;);</span>
+<span class="fc" id="L104">                break;</span>
+
+            case 2:
+<span class="fc" id="L107">                System.out.println(&quot;                     &quot;);</span>
+<span class="fc" id="L108">                System.out.println(&quot;¿Que deseas hacer?&quot;);</span>
+<span class="fc" id="L109">                System.out.println(&quot;1. Completar una tarea&quot;);</span>
+<span class="fc" id="L110">                System.out.println(&quot;2. Editar una tarea&quot;);</span>
+<span class="fc" id="L111">                System.out.println(&quot;3. Borrar una tarea&quot;);</span>
+<span class="fc" id="L112">                System.out.println(&quot;4. Ver tareas completadas&quot;);</span>
+<span class="fc" id="L113">                System.out.println(&quot;5. Volver al menú principal&quot;);</span>
+<span class="fc" id="L114">                break;</span>
+
+            case 3:
+<span class="fc" id="L117">                System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L118">                System.out.println(&quot;----------- Agregar una tarea ---------------&quot;);</span>
+<span class="fc" id="L119">                break;</span>
+
+            case 4:
+<span class="fc" id="L122">                System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L123">                System.out.println(&quot;¿Deseas realizar otra accion?&quot;);</span>
+<span class="fc" id="L124">                System.out.println(&quot;1. Agregar otra tarea&quot;);</span>
+<span class="fc" id="L125">                System.out.println(&quot;2. Volver al menú principal&quot;);</span>
+<span class="fc" id="L126">                System.out.println(&quot;3. Salir de la aplicación&quot;);</span>
+<span class="fc" id="L127">                break;</span>
+
+            case 5:
+<span class="fc" id="L130">                System.out.println(&quot;Agradecemos tu preferencia. ¡Vuelve pronto!&quot;);</span>
+<span class="fc" id="L131">                break;</span>
+
+            default:
+<span class="fc" id="L134">                System.out.println(&quot;Opcion no valida&quot;);</span>
+                break;
+        }
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * Manejo principal del menú y ejecución de la aplicación.
+     * 
+     * Ejecuta un ciclo while que se mantiene activo mientras la variable appRunner
+     * sea true.
+     * Dentro del ciclo: Muestra el menú principal, solicita al usuario una opción y
+     * ejecuta
+     * la acción correspondiente según la opción elegida.
+     */
+    public void menu() {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        while (appRunner) {</span>
+<span class="nc" id="L150">            menuprincipal();</span>
+<span class="nc" id="L151">            int opcion = opcionElegida();</span>
+<span class="nc" id="L152">            opcionEscogida(opcion);</span>
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">    }</span>
+
+    /**
+     * Muestra el menú principal de la aplicación.
+     * 
+     * Despliega las acciones disponibles al usuario y solicita el ingreso de una
+     * opción.
+     */
+    public void menuprincipal() {
+<span class="fc" id="L163">        showOptions(1);</span>
+<span class="fc" id="L164">        System.out.print(&quot;Por favor, ingrese una opción: &quot;);</span>
+<span class="fc" id="L165">    }</span>
+
+    /**
+     * Solicita y valida la opcion ingresada por el usuario.
+     * 
+     * Ejecuta un ciclo while que verifica que la entrada sea un número entero.
+     * Muestra un mensaje de error cuando el usuario ingresa un valor
+     * inválido(signo, letra, etc..)
+     * y vuelve a solicitar un valor válido.
+     * 
+     * @return el número entero ingresado correctamente por el usuario.
+     */
+    public int opcionElegida() {
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        while (!sc.hasNextInt()) {</span>
+<span class="fc" id="L179">            System.out.println(&quot;Entrada inválida. Por favor ingrese un número.&quot;);</span>
+<span class="fc" id="L180">            sc.nextLine();</span>
+        }
+
+<span class="fc" id="L183">        int option = sc.nextInt();</span>
+<span class="fc" id="L184">        sc.nextLine();</span>
+<span class="fc" id="L185">        return option;</span>
+    }
+
+    /**
+     * Gestiona la opcion ingresada por el usuario.
+     * 
+     * Ejecuta un switch, que de acuerdo a la opción ingresada por el usuario,
+     * evalúa y ejecuta distintas funciones.
+     * 
+     * @param option 1 ejecuta el subMenú para visualizar y gestionar las tareas.
+     *               2 ejecuta la acción para agregar una nueva tarea.
+     *               3 finaliza la ejecución de la aplicación.
+     *               Cualquier otro valor muestra un mensaje indicando que la opción
+     *               no es válida.
+     */
+    public void opcionEscogida(int option) {
+<span class="pc bpc" id="L201" title="2 of 4 branches missed.">        switch (option) {</span>
+            case 1:
+<span class="nc" id="L203">                subMenu();</span>
+<span class="nc" id="L204">                break;</span>
+
+            case 2:
+<span class="nc" id="L207">                optionAddTask();</span>
+<span class="nc" id="L208">                comeBack();</span>
+<span class="nc" id="L209">                break;</span>
+
+            case 3:
+<span class="fc" id="L212">                salirDeLaApp();</span>
+<span class="fc" id="L213">                break;</span>
+
+            default:
+<span class="fc" id="L216">                System.out.println(&quot;Opcion no válida. Por favor ingrese una opcion válida (1, 2 o 3)&quot;);</span>
+                break;
+        }
+<span class="fc" id="L219">    }</span>
+
+    /**
+     * Finaliza la ejecución de la aplicación.
+     *
+     * Cambia la variable appRunner a false para detener el ciclo principal
+     * y muestra un mensaje de salida correspondiente.
+     */
+    public void salirDeLaApp() {
+<span class="fc" id="L228">        showOptions(5);</span>
+<span class="fc" id="L229">        appRunner = false;</span>
+<span class="fc" id="L230">    }</span>
+
+    /**
+     * Submenú que permite visualizar y gestionar las tareas.
+     * 
+     * Utiliza una variable local (subMenuRunner) que maneja la
+     * ejecución y finalización del submenú.
+     * 
+     * Ejecuta un ciclo while que se mantiene activo mientras
+     * subMenuRunner sea true. Dentro del ciclo muestra el subMenú,
+     * solicita al usuario una opción y ejecuta la acción de
+     * acuerdo a la opción ingresada.
+     */
+    private void subMenu() {
+<span class="nc" id="L244">        boolean subMenuRunner = true;</span>
+
+<span class="nc bnc" id="L246" title="All 2 branches missed.">        while (subMenuRunner) {</span>
+<span class="nc" id="L247">            showSubMenu();</span>
+<span class="nc" id="L248">            int subMenuOp = opcionElegida();</span>
+<span class="nc" id="L249">            subMenuRunner = subMenuOptions(subMenuOp);</span>
+<span class="nc" id="L250">        }</span>
+<span class="nc" id="L251">    }</span>
+
+    /**
+     * Muestra el submenú de tareas pendientes.
+     * 
+     * Imprime las tareas pendientes mediante el gestor
+     * muestra las posibles acciones a realizar y
+     * solicita al usuario una opción.
+     */
+    public void showSubMenu() {
+<span class="fc" id="L261">        System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L262">        System.out.println(&quot;----------- Listado de tareas Pendientes---------------&quot;);</span>
+<span class="fc" id="L263">        gestor.showTareasPendientes();</span>
+<span class="fc" id="L264">        showOptions(2);</span>
+<span class="fc" id="L265">        System.out.print(&quot;Por favor, ingrese una opción: &quot;);</span>
+<span class="fc" id="L266">    }</span>
+
+    /**
+     * Gestiona la opción ingresada por el usuario del submenú
+     * 
+     * Evalúa la opcion ingresada por el usuario mediante un switch
+     * y ejecuta la acción correspondiente a la opción ingresada.
+     * 
+     * Opciones:
+     * 1 opción que permite completar una tarea.
+     * 2 opción que permite editar una tarea.
+     * 3 opción que permite borrar una tarea.
+     * 4 opción que muestra las tareas completadas.
+     * 5 opción que permite volver al menú anterior.
+     * Cualquier otro valor ingresado muestra un mensaje que indica
+     * que la opción no es válida.
+     * 
+     * @param subMenuOp número ingresado por el usuario que determina la opción a
+     *                  ejecutar.
+     * @return true si el submenú debe continuar ejecutándose.
+     *         false si debe finalizar y regresar al menú anterior.
+     */
+    public boolean subMenuOptions(int subMenuOp) {
+<span class="fc" id="L289">        int totalTareas = gestor.totalTareas();</span>
+
+<span class="fc bfc" id="L291" title="All 2 branches covered.">        if (noHayTareasRegistradas(totalTareas, subMenuOp)) {</span>
+<span class="fc" id="L292">            return true;</span>
+        }
+
+<span class="fc bfc" id="L295" title="All 6 branches covered.">        switch (subMenuOp) {</span>
+            case 1:
+<span class="fc" id="L297">                System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L298">                System.out.println(&quot;-----Completar una tarea ------&quot;);</span>
+<span class="fc" id="L299">                optionCompleteTask();</span>
+<span class="fc" id="L300">                return true;</span>
+            case 2:
+<span class="fc" id="L302">                System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L303">                System.out.println(&quot;-----Editar una tarea------&quot;);</span>
+<span class="fc" id="L304">                optionEditTask();</span>
+<span class="fc" id="L305">                return appRunner;</span>
+
+            case 3:
+<span class="fc" id="L308">                System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L309">                System.out.println(&quot;-----Borrar una tarea------&quot;);</span>
+<span class="fc" id="L310">                optionDeleteTask();</span>
+<span class="fc" id="L311">                return true;</span>
+
+            case 4:
+<span class="fc" id="L314">                System.out.println(&quot; &quot;);</span>
+<span class="fc" id="L315">                System.out.println(&quot;----------- Listado de tareas Completadas---------------&quot;);</span>
+<span class="fc" id="L316">                gestor.showTareasCompletas();</span>
+<span class="fc" id="L317">                return true;</span>
+
+            case 5:
+<span class="fc" id="L320">                System.out.println(&quot;Volviendo al menu anterior....&quot;);</span>
+<span class="fc" id="L321">                return false;</span>
+
+            default:
+<span class="fc" id="L324">                System.out.println(&quot;Opción no válida&quot;);</span>
+<span class="fc" id="L325">                return true;</span>
+        }
+    }
+
+    /**
+     * Verifica si hay tareas registradas antes de ejecutar 
+     * ciertas opciones.
+     * 
+     * Si el total de tareas es 0 y el usuario ingreso la opción
+     * 1, 2 o 3, se muestra un mensaje indicando que no hay tareas
+     * agregadas.
+     * 
+     * @param totalTareas cantidad de tareas registradas.
+     * @param opcion      opcion seleccionada por el usuario.
+     * @return          true si no hay tareas registradas, 
+     *                  false en caso contrario.
+     */
+    private boolean noHayTareasRegistradas(int totalTareas, int opcion) {
+<span class="pc bpc" id="L343" title="2 of 8 branches missed.">        if (totalTareas == 0 &amp;&amp; (opcion == 1 || opcion == 2 || opcion == 3)) {</span>
+<span class="fc" id="L344">            gestor.noHayTareas();</span>
+<span class="fc" id="L345">            return true;</span>
+        }
+<span class="fc" id="L347">        return false;</span>
+    }
+
+    /**
+     * Gestiona el proceso de creación de una nueva tarea.
+     * 
+     * Muestra el mensaje correspondiente para agregar una tarea,
+     * solicita al usuario una descripción y el nivel de prioridad
+     * de la tarea, y delega al gestor de tareas la creación de
+     * la nueva tarea con los datos ingresados.
+     * 
+     * El Nivel de prioridad debe ingresarse como:
+     * 1 para prioridad Alta y 2 para prioridad Baja.
+     * 
+     */
+    public void optionAddTask() {
+<span class="fc" id="L363">        showOptions(3);</span>
+<span class="fc" id="L364">        System.out.print(&quot;Ingrese su tarea: &quot;);</span>
+<span class="fc" id="L365">        String descripcion = sc.nextLine();</span>
+
+<span class="fc" id="L367">        System.out.print(&quot;Escriba la prioridad (1 = Alta o 2 = Baja): &quot;);</span>
+<span class="fc" id="L368">        int priority = opcionElegida();</span>
+
+<span class="fc" id="L370">        gestor.addTarea(descripcion, priority);</span>
+<span class="fc" id="L371">    }</span>
+
+    /**
+     * Controla el subflujo posterior a la creación de una tarea.
+     * 
+     * Utiliza una variable local (back) que gestiona la ejecución
+     * y finalización de este submenú.
+     * 
+     * Ejecuta un ciclo while que se mantiene activo mientras back sea true.
+     * Dentro del ciclo muestra las opciones correspondientes, solicita
+     * al usuario ingresar una opción y ejecuta el método comeBackSubMenu que
+     * determina si la variable back debe continuar ejecutándose o finalizar.
+     */
+    private void comeBack() {
+<span class="nc" id="L385">        boolean back = true;</span>
+
+<span class="nc bnc" id="L387" title="All 2 branches missed.">        while (back) {</span>
+<span class="nc" id="L388">            showOptions(4);</span>
+<span class="nc" id="L389">            int optioncb = opcionElegida();</span>
+<span class="nc" id="L390">            back = comeBackSubMenu(optioncb);</span>
+<span class="nc" id="L391">        }</span>
+<span class="nc" id="L392">    }</span>
+
+    /**
+     * Gestiona y controla las opciones del subflujo posterior a
+     * la creación de una tarea.
+     * 
+     * Comportamiento:
+     * 1 opción para agregar otra tarea.
+     * 2 opción para volver al menú anterior.
+     * 3 opción para finalizar la aplicación.
+     * Cualquier otro valor mostrará un mensaje de opción inválida.
+     * 
+     * @param optioncb número ingresado por el usuario que determina la opción a a
+     *                 ejecutar.
+     * @return true si el subflujo debe continuar ejecutándose.
+     *         false si debe finalizar. En el caso de opción 3 provoca la
+     *         finalización de la aplicación.
+     */
+    public boolean comeBackSubMenu(int optioncb) {
+<span class="pc bpc" id="L411" title="1 of 4 branches missed.">        switch (optioncb) {</span>
+            case 1:
+<span class="nc" id="L413">                optionAddTask();</span>
+<span class="nc" id="L414">                return true;</span>
+            case 2:
+<span class="fc" id="L416">                return false;</span>
+
+            case 3:
+<span class="fc" id="L419">                salirDeLaApp();</span>
+<span class="fc" id="L420">                return false;</span>
+
+            default:
+<span class="fc" id="L423">                System.out.println(&quot;Opcion no válida.&quot;);</span>
+<span class="fc" id="L424">                return true;</span>
+        }
+    }
+
+    /**
+     * Gestiona el proceso de eliminación de una tarea.
+     * 
+     * Solicita al usuario el ingreso del id de la tarea
+     * a eliminar y delega al gestor de tareas la eliminación
+     * de la tarea seleccionada.
+     */
+    public void optionDeleteTask() {
+<span class="fc" id="L436">        System.out.println(&quot;Ingrese el ID de la tarea a eliminar: &quot;);</span>
+<span class="fc" id="L437">        int idDelete = opcionElegida();</span>
+<span class="fc" id="L438">        gestor.deleteTareas(idDelete);</span>
+<span class="fc" id="L439">    }</span>
+
+    /**
+     * Gestiona el proceso para completar una tarea.
+     * 
+     * Solicita al usuario el ingreso del id de la tarea
+     * a completar y delega al gestor de tareas la operación
+     * correspondiente.
+     */
+    public void optionCompleteTask() {
+<span class="fc" id="L449">        System.out.println(&quot;Ingrese el ID de la tarea a completar: &quot;);</span>
+<span class="fc" id="L450">        int idTarea = opcionElegida();</span>
+<span class="fc" id="L451">        gestor.completarTarea(idTarea);</span>
+<span class="fc" id="L452">    }</span>
+
+    /**
+     * Gestiona el proceso de edición de una tarea.
+     * 
+     * Solicita al usuario mediante el método ingresoIdAEditar()
+     * el identificador de la tarea.
+     * 
+     * Si el identificador es válido (distinto de -1), delega al gestor
+     * de tareas el despliegue de las opciones de edición, y ejecuta la
+     * acción correspondiente mediante editSubMenuOptions().
+     * 
+     * Si el identificador no es válido, muestra un mensaje de error y
+     * finaliza el método
+     */
+    public void optionEditTask() {
+
+<span class="fc" id="L469">        int resultado = ingresoIdAEditar();</span>
+<span class="pc bpc" id="L470" title="1 of 2 branches missed.">        if (resultado != -1) {</span>
+<span class="fc" id="L471">            gestor.editSubMenuShowOptions();</span>
+<span class="fc" id="L472">            editSubMenuOptions(resultado);</span>
+        } else {
+<span class="nc" id="L474">            System.out.println(&quot;ID invalido&quot;);</span>
+<span class="nc" id="L475">            return;</span>
+        }
+<span class="fc" id="L477">    }</span>
+
+    /**
+     * Gestiona el identificador ingresado por el usuario para el menú de edición.
+     * 
+     * Solicita al usuario el idetificador de la tarea a editar,
+     * y delega al gestor de tareas la validación correspondiente.
+     * 
+     * @return el identificador validado por el gestor.
+     *         puede retornar -1 si la tarea no existe.
+     */
+    private int ingresoIdAEditar() {
+<span class="fc" id="L489">        System.out.println(&quot;Ingrese el ID de la tarea a editar: &quot;);</span>
+<span class="fc" id="L490">        int idTarea = opcionElegida();</span>
+<span class="fc" id="L491">        int idToEdit = gestor.editarTarea(idTarea);</span>
+<span class="fc" id="L492">        return idToEdit;</span>
+    }
+
+    /**
+     * Gestiona y controla las opciones del submenú de edición de tareas.
+     * 
+     * Evalúa la opcion ingresada por el usuario mediante un switch
+     * y ejecuta la acción correspondiente.
+     * 
+     * Opciones:
+     * 1: cambia la descripción de la tarea mediante el método newEditDescription()
+     * y delega al gestor el guardado de la nueva información.
+     * 2: Muestra el estado actual de la tarea y mediante el método
+     * editCambioEstadoCompletado() cambia ese estado.
+     * 3: retorna al menú anterior sin realizar cambios.
+     * 4: finaliza la ejecución de la aplicación.
+     * Cualquier otro valor muestra el mensaje de opción inválida.
+     * 
+     * @param resultado identificador validado de la tarea a editar, obtenida a
+     *                  través del método ingresoIdAEditar()
+     */
+    private void editSubMenuOptions(int resultado) {
+<span class="fc" id="L514">        int opcion = opcionElegida();</span>
+<span class="pc bpc" id="L515" title="4 of 5 branches missed.">        switch (opcion) {</span>
+            case 1:
+<span class="fc" id="L517">                String nuevaDescripcion = newEditDescription();</span>
+<span class="fc" id="L518">                gestor.editarDescripcionTarea(resultado, nuevaDescripcion);</span>
+<span class="fc" id="L519">                break;</span>
+
+            case 2:
+<span class="nc" id="L522">                gestor.estadoTareaAEditar(resultado);</span>
+<span class="nc" id="L523">                editCambioEstadoCompletado(resultado);</span>
+<span class="nc" id="L524">                break;</span>
+
+            case 3:
+<span class="nc" id="L527">                System.out.println(&quot;Volviendo al menú anterior....&quot;);</span>
+<span class="nc" id="L528">                break;</span>
+
+            case 4:
+<span class="nc" id="L531">                salirDeLaApp();</span>
+<span class="nc" id="L532">                break;</span>
+
+            default:
+<span class="nc" id="L535">                System.out.println(&quot;Opcion invalida&quot;);</span>
+                break;
+        }
+
+<span class="fc" id="L539">    }</span>
+
+    /**
+     * Solicita al usuario una nueva descripción para la tarea en el proceso de
+     * edición.
+     * 
+     * Muestra un mensaje solicitando la nueva descripcion y captura el texto
+     * ingresado por el usuario.
+     * 
+     * @return una cadena te texto con la nueva descripción de la tarea.
+     */
+    private String newEditDescription() {
+<span class="fc" id="L551">        System.out.print(&quot;Ingrese la nueva descripcion: &quot;);</span>
+<span class="fc" id="L552">        String newDescripcion = sc.nextLine();</span>
+<span class="fc" id="L553">        return newDescripcion;</span>
+    }
+
+    /**
+     * Gestiona el cambio de estado de la tarea seleccionada en el proceso de
+     * edición.
+     * 
+     * Muestra un mensaje preguntando al usuario si desea cambiar el estado de
+     * la tarea previamente seleccionada, solicita el ingreso de una opción y
+     * ejecuta la acción correspondiente.
+     * 
+     * Comportamiento:
+     * 1 A través del gestor realiza el cambio de estado e imprime un mensaje de
+     * éxito.
+     * 2 detiene la ejecución para volver al menú anterior.
+     * Cualquier otra opción mostrará un mensaje de opción no válida.
+     * 
+     * @param resultado corresponde al identificador de la tarea seleccionada a
+     *                  editar
+     */
+    private void editCambioEstadoCompletado(int resultado) {
+<span class="nc" id="L574">        System.out.println(&quot;¿Cambiar estado? (1. Si - 2. No)&quot;);</span>
+<span class="nc" id="L575">        int optionstate = opcionElegida();</span>
+<span class="nc bnc" id="L576" title="All 3 branches missed.">        switch (optionstate) {</span>
+            case 1:
+<span class="nc" id="L578">                gestor.cambioDeEstado(resultado);</span>
+<span class="nc" id="L579">                System.out.println(&quot;Estado cambiado correctamente.&quot;);</span>
+<span class="nc" id="L580">                break;</span>
+
+            case 2:
+<span class="nc" id="L583">                System.out.println(&quot;Volviendo al menú anterior....&quot;);</span>
+<span class="nc" id="L584">                break;</span>
+
+            default:
+<span class="nc" id="L587">                System.out.println(&quot;Opcion no válida.&quot;);</span>
+                break;
+        }
+<span class="nc" id="L590">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
