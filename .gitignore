@@ -1,0 +1,17 @@
+# Archivos de Visual Studio
+*.user
+*.suo
+*.vscode/
+*.vs/
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# Archivos temporales y logs
+*.tmp
+*.log
+
+# Configuraciones locales
+*.dbmdl
